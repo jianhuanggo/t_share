@@ -1,0 +1,90 @@
+Modernize the deployment of bastion servers on AWS to enhance user experience, align with best practices, and develop reusable components for future projects.
+
+
+1.  Identification of Stakeholders and gather existing deployment processes (1/2 sprint)
+
+	1.1  Identify who has the most knowledge about the current process and any documentation related to it.
+	1.2  Gather all available documentation related to the current deployment process, note down any discrepancies or gaps in the documentation for clarification. Create a flowchart or diagram representing the current deployment process if needed.
+	1.3  Analyze to identify bottlenecks, redundancies, or areas that might benefit from automation.
+	1.4  Identify who has the most knowledge about the current process and any documentation related to it.
+	1.5  List down all tools, platforms, and systems involved in the deployment.
+
+2.  Hands-on Review of the current process.  This provides invaluable insights that are often missed in theoretical discussions. This step ensures that the modernization effort is rooted in real-world scenarios, making the subsequent improvements more effective and relevant. (1/2 sprint)
+	
+	2.1. Participate in a Live Deployment
+	2.2. Coordinate with the subject matter expert on the team to be present during a scheduled deployment. This gives a firsthand experience of the entire process. Pay close attention to the sequence of steps, interactions between different tools, and any manual interventions required.
+	2.3  Document any workarounds or manual fixes applied to address these challenges and understand the root causes of such challenges. 
+
+3.  Research/Design Solution (1/2 sprint)
+
+	3.1. Brainstorm & Ideate and prioritize criteria (e.g., cost, efficiency, scalability, user-friendliness).
+	3.2. Document all potential solutions and Compare the brainstormed solutions against the evaluation criteria.
+	3.3. Estimate the cost of implementing each solution.
+
+4.  Develop a Proof of concept (1 sprint)
+
+	4.1 create an environment which optimized for fast iteration
+	4.2 creating a MVP of the solution, and evaluating its performance in a controlled environment to identify potential strengths and weaknesses.
+	4.3 Based on feedback and test results, make any necessary modifications to enhance the solution or address any challenges.
+
+5.  Implementation (1 sprint)
+	
+	5.1 Develop code leveraging DevX cloudstack. 
+	5.2 leveraging AWS best practices
+
+6.  Testing (1/2 sprint)
+	
+	Test the solution to ensure it meets the specified requirements and is free from defects.
+	Implement iterative cycles of testing, feedback, and refinements
+	Monitor the solution's performance against predefined KPIs
+
+7.  Deployment (1/2 sprint)
+
+	Deploy to preprod environment
+	Deploy to prod environment
+
+8.  Documentation (2 points)
+
+
+
+
+
+
+Service Mesh Throttling
+
+To extend existing capability in Zachboard to Service Mesh Throttling
+
+1.  Identification of Stakeholders and gather existing deployment processes (1 sprint)
+
+	1.1  Identify who has the most knowledge about the current process and any documentation related to it.
+	1.2  Gather all available information related to the existing code base, data sources and integration points, note down any discrepancies or gaps in the documentation for clarification. Create a flowchart or diagram representing the current deployment process if needed.
+	1.3  Identify external depedencies and understand their perspectives and timelines
+
+
+2.  Research/Design Solution (1/2 sprint)
+
+	3.1. Brainstorm & Ideate and prioritize criteria (e.g., cost, efficiency, scalability, user-friendliness).
+	3.2. Document all potential solutions and Compare the brainstormed solutions against the evaluation criteria.
+	3.3. Estimate the cost of implementing each solution.
+
+3.  Develop a Proof of concept (2 sprints)
+
+	4.1 create an environment which optimized for fast iteration
+	4.2 creating a MVP of the solution, and evaluating its performance in a controlled environment to identify potential strengths and weaknesses.
+	4.3 based on feedback and test results, make any necessary modifications to enhance the solution or address any challenges.
+
+4.  Implementation (1 sprint)
+	
+
+5.  Testing (1/2 sprint)
+	
+	Test the solution to ensure it meets the specified requirements and is free from defects.
+	Implement iterative cycles of testing, feedback, and refinements
+	Monitor the solution's performance against predefined KPIs
+
+7.  Deployment 
+
+	Deploy to preprod environment
+	Deploy to prod environment
+
+8.  Documentation
