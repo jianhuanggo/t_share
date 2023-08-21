@@ -1,0 +1,69 @@
+Design Consideration:
+
+
+
+Service Registry
+
+Pros:
+
+	Established Procedure: The process is known and widely accepted by clients.  Some services already retrieve similar data using this service. 
+
+	User-Friendly Interface: Comes with a UI that simplifies modifications.
+
+	Efficient Integration: Previously integrated with Zachboard, minimizing further development needs.
+
+
+Cons:
+
+	User Experience: Customers might need to invest more effort to input data into the service registry. Hence, full user adoption isn't guaranteed or align with the expected timeline.
+
+	Data Reliability: Inconsistencies from third-party sources can affect our outcomes.
+
+	Scalability Issues: The existing data infrastructure might struggle with growth or added demands.
+
+	Modification Constraints: Suggested changes to an external system could be deferred due to other priorities.
+
+
+
+
+Argo Workflows - functions as a Kubernetes-adapted engine tailored for running jobs and managing DAG workflows within the Kubernetes framework.
+
+Pros:
+
+	Optimal User Interaction: The system allows users to navigate without additional procedures.
+
+	Live Data Overview: Offers instantaneous updates on the progress of workflows, including their current state and associated logs.
+
+	Alignment with Kubernetes: Crafted inherently for Kubernetes, Argo ensures congruence with other Kubernetes resources and processes.
+
+	Uniform Data Presentation: Workflow-related information is often displayed in a structured, consistent style.
+
+	Tailored Data Requests: Users can select and retrieve details from specific workflows or phases, enhancing data retrieval efficiency.
+
+Cons:
+
+	Permission Management: The platform requires definitive authentication measures, with potential limitations based on user roles. Managing access rights across various namespaces might require added effort.
+
+
+
+
+Solution Focused on Configuration utilizing GitHub as Storage
+
+Pros:
+
+	Streamlined Adoption: The process is familiar to clients, eliminating the need for additional training.
+
+	Efficient Integration: Already connected with Zachboard, reducing development demands.
+
+Cons:
+
+	Integration Challenges: Proposed changes to an outside system (wavefront) might be deferred or dismissed due to other priorities.
+
+	Permission Management: The platform requires definitive authentication measures, with potential limitations based on user privileges. Managing access rights across various repo might require added effort.
+
+	API Restrictions: GitHub API comes with stricter utilization boundaries.
+
+	Data Fragmentation Issues: Information can be scattered across numerous files, change logs, or repositories, complicating the task of gathering a full dataset.
+
+	Extraneous Data Concerns: Repositories might house superfluous information or sizable files unrelated to specific requirements, causing inefficiencies in data extraction and handling.
+
