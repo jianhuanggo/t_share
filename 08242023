@@ -1,0 +1,18 @@
+IIPC-3310: Need more clarity for swagging
+
+What constitute a perf auto-failover? I guess it is related to bastion decomp? 
+
+Is there a current approach to create a Amazon CloudWatch alarm? If so, is there any documentation?
+
+Which Slack channels should be notified when a performance auto-failover occurs?  
+
+What information should be included in the Slack notification? 
+
+What should happen if there's an issue with sending notifications to Slack? Is there a fallback mechanism? 
+
+What measures will be taken to ensure proper monitoring of this process and to receive notifications in the event of failure?
+
+
+IIPC-3335: changed to 4 points 
+
+IIPC-3312: are we building a repeatable process to alert when such security concern do occur?  If so, do we have a current framework to similar such alerts?  Need more clarity for swagging
