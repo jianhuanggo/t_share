@@ -1,0 +1,198 @@
+const fs = require("fs");
+const fsp = require("fs").promise;
+import { hashmap } from "aws-sdk/clients/glacier";
+
+export interface VpcType {
+    VpcId?: string;
+    Tags: { Key: string, Value: string }[]
+    [key: string]: any
+  }
+  
+export interface SubnetType {
+  AvailabilityZone?: string;
+  SubnetId?: string;
+  Tags: { Key: string, Value: string }[]
+  [key: string]: any
+}
+
+export interface MapType {
+  [key: string]: any
+}
+
+/**
+ * A simple wrapper to perform lookup up operation on a hashmap
+ * @param obj a hashmap
+ * @param key a key of hashmap
+ * @param default_value if the key doesn't exist, return this
+ * @returns return the result of key based lookup
+ */
+
+export function map_get(obj: hashmap, key: string, default_value: any = ""): any {
+    var result: string = obj[key];
+    return (typeof result !== "undefined") ? result : default_value;
+}
+
+/**
+ * read file synchronously
+ * @param filepath absolute filename path
+ * @returns return file content
+ */
+
+export function readfile_sync (filepath: string) {
+  try {
+      return fs.readFileSync(filepath, 'utf-8');
+  }catch (error) {
+      throw Error("something is wrong in function readfile_sync" + JSON.stringify(error));
+  }
+}
+  
+/**
+ * this function gets the name of aws resources (for example VPC or subnet) which is an aws tag that has the attribute "Key"="Name"
+ * @param vpc_tag an array of tags
+ * @returns return the name of the aws resource
+ */
+
+export function get_name(vpc_tag: MapType[] | undefined): string {
+
+  let object_name: string = ""
+  if (vpc_tag === undefined) {
+    return object_name
+  }
+
+  vpc_tag.forEach(each_tag => {
+      if (map_get(each_tag, "Key") == "Name") { 
+          object_name = map_get(each_tag, "Value")
+      }
+  }
+  );
+  return object_name
+}
+
+/**
+ * this async function returns the corresponding vpc id given a vpc name
+ * @param aws_ec2 aws ec2 client object
+ * @param vpc_name the name of vpc
+ * @returns return a promise contains the vpc id
+ */
+
+export async function get_vpc_id(aws_ec2: any, vpc_name: string): Promise<string> {
+  
+    let vpc_id = "";
+    const response = await aws_ec2.describeVpcs().promise();
+    const data: VpcType[] = response.Vpcs;
+    data.forEach(each_vpc => {
+        if (get_name(each_vpc.Tags) == vpc_name) {
+            vpc_id = map_get(each_vpc, "VpcId")
+        }
+    }
+    );
+    return vpc_id
+}
+
+/**
+ * this async function returns the corresponding vpc name given a vpc id
+ * @param aws_ec2 aws ec2 client object
+ * @param vpc_id the vpc id
+ * @returns return a promise contains the vpc name
+ */
+  
+export async function get_vpc_name(aws_ec2: any, vpc_id: string): Promise<string> {
+
+  let vpc_name: string = "";
+  const response = await aws_ec2.describeVpcs().promise();
+  console.log(response)
+  const data: VpcType[] = response.Vpcs;
+  data.forEach(each_vpc => {
+      if (map_get(each_vpc, "VpcId") == vpc_id) {
+        vpc_name = get_name(each_vpc.Tags)
+      }
+  }
+  );
+  return vpc_name
+}
+
+/**
+ * this async function returns a set of required information for intuit bastion
+ * @param aws_ec2 aws ec2 client object
+ * @param subnet_ids a list of subnet ids
+ * @param vpc_id the vpc id
+ * @returns return a promise contains a map that comprised of a list of availablity zones and a list public subnet ids 
+ */
+  
+export async function get_subnets(aws_ec2: any, subnet_ids: string[], vpc_id: string): Promise<MapType> {
+
+  let availability_zone: string[] = [];
+  let public_subnet_ids: string[] = [];
+
+  const response = await aws_ec2.describeSubnets().promise();
+  const data: SubnetType[] = response.Subnets;
+  data.forEach(each_subnet => {
+
+      const target_subnet_tags: MapType[] = each_subnet.Tags
+      let target_subnet_name = get_name(target_subnet_tags);
+      
+      if (map_get(each_subnet, 'VpcId') == vpc_id && subnet_ids.indexOf(target_subnet_name) >= 0)
+        {
+            availability_zone.push(map_get(each_subnet, 'AvailabilityZone'))
+            public_subnet_ids.push(map_get(each_subnet, 'SubnetId'))
+        }
+      }
+  );
+  return {'availability_zone': availability_zone, 'public_subnet_ids': public_subnet_ids}
+}
+
+
+/**
+ * read file asynchronously
+ * @param filepath absolute filename path
+ * @returns return file content
+ */
+
+export async function readfile (filepath: string) {
+  try {
+      return await fsp.readFile(filepath, 'utf-8');
+  }catch (error) {
+      throw Error("something is wrong in function readfile" + JSON.stringify(error));
+  }
+}
+
+/**
+ * read file asynchronously
+ * @param filepath absolute filename path
+ * @returns return userdata content with error checking
+ */
+export function userdata_with_errcheck(userdata: string): string {
+  let parse_command = []
+  try {
+      let command_num = 1000;
+
+      // init()
+      let code_block = ""
+      let code_header = true
+      const lines = userdata.split("\n")
+
+      for (let line of lines) {
+          console.log(line)
+          if (line.startsWith("#SYSENGCOMMAND")) {
+              parse_command.push(code_block)
+              if (!code_header) {
+                  parse_command.push("check_err SYSENGCOMMAND" + command_num.toString())
+                  
+              }
+              code_header = false
+              command_num += 100
+              code_block = "\n\n###SYSENGCOMMAND" + command_num.toString() + "###\n"
+          }else {
+              code_block += line + "\n"
+          }  
+      }
+      if (code_block) {
+          parse_command.push(code_block)
+          parse_command.push("check_err SYSENGCOMMAND" + command_num.toString())
+      }
+      return parse_command.join("\n")
+
+  }catch(error){
+      throw Error("something is wrong in function userdata_with_errcheck" + JSON.stringify(error));
+  }
+}
