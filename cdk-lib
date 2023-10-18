@@ -241,3 +241,22 @@ export class CdkStack extends cdk.Stack {
     )(this)
   }
 }
+
+
+The code you provided serves as the glue code that orchestrates a series of steps to spawn a bastion host in AWS. This process is asynchronous in nature, meaning that different tasks are performed concurrently and await the completion of certain operations. 
+
+Here's a breakdown of how this is achieved:
+
+The code retrieves information about the Virtual Private Cloud (VPC) and its associated subnets using AWS SDK calls.
+Multiple AWS SDK calls for VPC and subnet data can be performed concurrently.
+Data about the VPC, such as VPC ID and name, is obtained asynchronously.
+Subnet details, including availability zones and public subnet IDs, are collected in parallel.
+VPC Creation and Bastion Host Configuration:
+
+The ec2.Vpc object representing the VPC is created using the CDK.
+This part of the code showcases the synergy between CDK constructs and AWS SDK calls.
+Asynchronously, the VPC's properties are populated with data retrieved from AWS SDK calls.
+The process ensures that the VPC object is correctly initialized before moving on.
+Finally, the configuration for the bastion host is built, combining data from the configuration file with user data for customization.
+The creation of the bastion host (IntuBastion) is initiated within the VPC, and it utilizes the configuration assembled earlier.
+In summary, the core of this code is its asynchronous nature, which enables multiple tasks to be executed concurrently and efficiently. This is essential when interacting with AWS services and resources, as it allows the program to remain responsive and minimize idle time while awaiting responses from AWS. The code's orchestration ensures that each step is completed successfully before proceeding to the next, ultimately resulting in the provisioning of a bastion host within the specified AWS infrastructure.
