@@ -1,3 +1,26 @@
+"Bastion Decomp" is a project focused on modernizing an existing bastion technology stack by leveraging the AWS Cloud Development Kit (CDK) and Software Development Kit (SDK), while adhering to standard DevX (Developer Experience) patterns. Here's a more detailed explanation of each component:
+
+Bastion Technology Stack:
+
+The term "bastion" typically refers to a secure gateway or server that allows authorized users to access and manage resources within a private network, such as an Amazon Virtual Private Cloud (VPC).
+The existing "bastion technology stack" refers to the infrastructure, tools, and processes currently in place to manage bastion hosts and secure access to AWS resources.
+Modernization:
+
+"Modernization" in this context means updating and improving the existing bastion technology stack to align with contemporary best practices, enhance security, and take advantage of newer AWS services and features.
+AWS CDK/SDK:
+
+The AWS Cloud Development Kit (CDK) is a framework for defining cloud infrastructure in code, allowing developers to provision and manage AWS resources using programming languages.
+The Software Development Kit (SDK) provides libraries and tools to interact with AWS services programmatically.
+In the context of the project, these AWS tools are leveraged to programmatically define, deploy, and manage the bastion infrastructure, making it more manageable and scalable.
+Standard DevX Patterns:
+
+"DevX" stands for Developer Experience, which focuses on improving the experience of developers working on a project.
+"Standard DevX patterns" refer to established best practices, guidelines, and workflows that enhance the developer experience.
+In the context of the project, adhering to standard DevX patterns means following well-defined processes and using tools that streamline development, deployment, and maintenance of the bastion infrastructure. It ensures that developers can work efficiently and collaboratively.
+In summary, the "Bastion Decomp" project aims to bring modernization to an existing bastion technology stack by utilizing AWS CDK and SDK to redefine and manage the infrastructure. It also places a strong emphasis on following standard DevX patterns to enhance the overall developer experience. This modernization effort can result in improved security, scalability, and maintainability of the bastion infrastructure while aligning it with AWS best practices and current industry standards.
+
+
+
 import { VendedConstructs } from "./vended-constructs";
 import * as cdk from "aws-cdk-lib";
 import * as ec2 from "aws-cdk-lib/aws-ec2";
