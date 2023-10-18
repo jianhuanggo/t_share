@@ -196,3 +196,22 @@ export function userdata_with_errcheck(userdata: string): string {
       throw Error("something is wrong in function userdata_with_errcheck" + JSON.stringify(error));
   }
 }
+
+
+map_get: This function performs a key-based lookup on a hashmap. It takes a hashmap (obj), a key to search for, and an optional default_value to return if the key doesn't exist. It returns the value associated with the key or the default value if the key is not found.
+
+readfile_sync: This function reads a file synchronously. It takes an filepath (the absolute filename path) as an argument and returns the content of the file as a string. If any error occurs during reading, it throws an error.
+
+get_name: This function is used to retrieve the name of an AWS resource (e.g., VPC or subnet) based on the AWS tags associated with it. It takes an array of tags (vpc_tag) and searches for a tag with the "Key" set to "Name." If found, it returns the "Value" of that tag, which represents the name of the AWS resource.
+
+get_vpc_id: An async function that returns the VPC ID associated with a given VPC name. It takes an AWS EC2 client object (aws_ec2) and the vpc_name to search for. It uses the AWS SDK to describe VPCs, iterates through the results, and returns the VPC ID that matches the provided name.
+
+get_vpc_name: Similar to get_vpc_id, this async function returns the VPC name associated with a given VPC ID. It takes an AWS EC2 client object (aws_ec2) and the vpc_id to search for. It describes VPCs, iterates through the results, and returns the name that matches the provided VPC ID.
+
+get_subnets: Another async function that retrieves information related to subnets within a VPC. It takes an AWS EC2 client object (aws_ec2), an array of subnet_ids, and the vpc_id. It uses the AWS SDK to describe subnets, filters them based on VPC ID and subnet IDs, and returns a map containing availability zones and public subnet IDs.
+
+readfile: An async function that reads a file asynchronously. It takes an filepath (the absolute filename path) as an argument and returns the content of the file as a Promise. If any error occurs during reading, it throws an error.
+
+userdata_with_errcheck: This function to process user data (commonly used for EC2 instance initialization) by adding error-checking and formatting. It splits the user data into blocks based on special comment lines (e.g., #SYSENGCOMMAND100#). Each block is followed by a check to ensure its successful execution. This processed user data is then returned as a string.
+
+Overall, these utility functions simplify common tasks when working with AWS resources, making it easier to manage VPCs, subnets, and user data for EC2 instances.  
