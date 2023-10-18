@@ -129,3 +129,42 @@ class IdentityApp(EmbedChain):
                 "Please make sure the type is right and that you are passing an instance."
             )
         super().__init__(config, llm=llm, db=db, embedder=embedder, system_prompt=system_prompt)
+
+
+
+from typing import Optional
+
+class GenAIStudio(BaseLlm):
+    def __init__(self, config: Optional[BaseLlmConfig] = None) -> None:
+        super().__init__(config=config)
+
+    # NOTE: This class does not use langchain. One reason is that `top_p` is not supported.
+
+    def get_llm_model_answer(self, prompt: str) -> str:
+        messages = []
+        if self.config.system_prompt:
+            messages.append({"role": "system", "content": self.config.system_prompt})
+        messages.append({"role": "user", "content": prompt})
+
+        response = genstudiopy.ChatCompletion.create(
+            model=self.config.model or "gpt-4-32k",
+            messages=messages,
+            temperature=0,
+            #max_tokens=self.config.max_tokens,
+            max_tokens=8000,
+            top_p=self.config.top_p,
+            stream=self.config.stream,
+        )
+
+        if self.config.stream:
+            return self._stream_llm_model_response(response)
+        else:
+            return response["choices"][0]["message"]["content"]
+
+    def _stream_llm_model_response(self, response) -> str:
+        """
+        This is a generator for streaming response from the OpenAI completions API
+        """
+        for line in response:
+            chunk = line["choices"][0].get("delta", {}).get("content", "")
+            yield chunk
