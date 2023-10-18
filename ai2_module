@@ -130,41 +130,30 @@ class IdentityApp(EmbedChain):
             )
         super().__init__(config, llm=llm, db=db, embedder=embedder, system_prompt=system_prompt)
 
-
-
+import logging
 from typing import Optional
 
-class GenAIStudio(BaseLlm):
-    def __init__(self, config: Optional[BaseLlmConfig] = None) -> None:
-        super().__init__(config=config)
 
-    # NOTE: This class does not use langchain. One reason is that `top_p` is not supported.
+# Define a function to create the class dynamically
+def create_identity_app_class():
+    class_dict = {
+        '__init__': lambda self, config=None, llm=None, llm_config=None, db=None, db_config=None,
+                     embedder=None, embedder_config=None, chromadb_config=None, system_prompt=None:
+            super(IdentityApp, self).__init__(config, llm, llm_config, db, db_config, embedder,
+                                             embedder_config, chromadb_config, system_prompt),
+    }
 
-    def get_llm_model_answer(self, prompt: str) -> str:
-        messages = []
-        if self.config.system_prompt:
-            messages.append({"role": "system", "content": self.config.system_prompt})
-        messages.append({"role": "user", "content": prompt})
+    IdentityApp = type('IdentityApp', (EmbedChain,), class_dict)
 
-        response = genstudiopy.ChatCompletion.create(
-            model=self.config.model or "gpt-4-32k",
-            messages=messages,
-            temperature=0,
-            #max_tokens=self.config.max_tokens,
-            max_tokens=8000,
-            top_p=self.config.top_p,
-            stream=self.config.stream,
-        )
+    return IdentityApp
 
-        if self.config.stream:
-            return self._stream_llm_model_response(response)
-        else:
-            return response["choices"][0]["message"]["content"]
+# Create the dynamic IdentityApp class
+IdentityApp = create_identity_app_class()
 
-    def _stream_llm_model_response(self, response) -> str:
-        """
-        This is a generator for streaming response from the OpenAI completions API
-        """
-        for line in response:
-            chunk = line["choices"][0].get("delta", {}).get("content", "")
-            yield chunk
+# Register the deserializable class as needed
+def register_deserializable(cls):
+    return cls
+
+@register_deserializable
+class EmbedChain:
+    pass
