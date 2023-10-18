@@ -1,0 +1,243 @@
+import { VendedConstructs } from "./vended-constructs";
+import * as cdk from "aws-cdk-lib";
+import * as ec2 from "aws-cdk-lib/aws-ec2";
+var AWS = require('aws-sdk');
+import { Construct } from 'constructs';
+// import { IntuBastion } from "@intuit-cdk/core";
+import { IntuBastion } from "../devX/src/intuit-bastion";
+const fs = require("fs");
+const fsp = require("fs").promise;
+import { MapType, map_get, readfile_sync, get_vpc_name, get_subnets, userdata_with_errcheck } from "../utils/cdk-utils-syseng";
+
+
+async function assemble_config_file(filepath: string, config_key: string) {
+
+  const content = readfile_sync(filepath);
+
+  const syseng_configuration = JSON.parse(content)
+
+  let bastion_configuration: any = {}
+  const lookup_config = map_get(syseng_configuration, config_key, {})
+
+  console.log("@@!!", lookup_config, config_key)
+
+  if (map_get(lookup_config, "vpc_id", "") == "") {
+
+      throw Error("can not find vpc_id in the configuration, here is the current configuration " + JSON.stringify(syseng_configuration))
+
+  }else {
+
+      bastion_configuration["vpc_id"] = map_get(lookup_config, "vpc_id")
+  }
+
+  if (map_get(lookup_config, "aws_account_number", "") == "") {
+
+    throw Error("can not find aws_account_number in the configuration, here is the current configuration " + JSON.stringify(syseng_configuration))
+  
+  }else {
+
+    bastion_configuration["aws_account_number"] = map_get(lookup_config, "aws_account_number")
+  
+  }
+
+  if (map_get(lookup_config, "bastion", "") == "") {
+
+      if (map_get(syseng_configuration, "default_bastion", "") == "") {
+          
+          console.log(map_get(syseng_configuration, "default_bastion", ""))
+
+          throw Error("can not find bastion or default bastion in the configuraton, here is the current configuration " + JSON.stringify(syseng_configuration));
+
+      }else {
+
+          bastion_configuration["bastion"] = map_get(syseng_configuration, "default_bastion")
+      }
+  } else {
+
+      bastion_configuration["bastion"] = map_get(lookup_config, "bastion")
+  }
+
+  if (map_get(lookup_config, "subnets", "") == "") {
+
+      if (map_get(syseng_configuration, "default_subnets", "") == "") {
+
+          throw Error("can not find subnets or default subnets in the configuraton, here is the current configuration " + JSON.stringify(syseng_configuration));
+
+      }else {
+
+          bastion_configuration["subnets"] = map_get(syseng_configuration, "default_subnets")
+      }
+  } else {
+
+      bastion_configuration["subnets"] = map_get(lookup_config, "subnets")
+  }
+  console.log("bastion!!!!", bastion_configuration)
+  return bastion_configuration
+}
+
+export interface CdkStackProps extends cdk.StackProps {
+  readonly assetId: string;
+  readonly gitOrg: string;
+  readonly gitRepo: string;
+  readonly imageTag: string;
+  readonly appEnv: string;
+  readonly environmentVars?: { [key: string]: string };
+}
+
+
+export function get_userData(mode: string, content: string, region: string, eip_id: string, environment: string, stack_name: string, aws_account_number: string){
+    const env_map = {
+      "qal": "qa",
+      "e2e": "e2e",
+      "prf": "prf"  
+    }
+
+    if (!environment.indexOf("_")) {
+
+      throw Error("environment is not in the correct format, it should be in the format of <region>_<environment> " + environment)
+
+    }
+
+    // let content = readfile_sync("sysEng.userdata1");
+    let userdata = content.replace(new RegExp("<<<aws-region>>>", "g"), region)
+    let userdata1 = userdata.replace(new RegExp("<<<eip-id>>>", "g"), eip_id)
+    let userdata2 = userdata1.replace(new RegExp("<<<environment>>>", "g"), map_get(env_map, environment.split('_')[1], ""));
+    let userdata3 = userdata2.replace(new RegExp("<<<stack_name>>>", "g"), stack_name);
+    let userdata4 = userdata3.replace(new RegExp("<<<aws_account_number>>>", "g"), aws_account_number);
+
+    if (mode == "check") {
+        return userdata_with_errcheck(userdata4)
+    }
+
+    return userdata4
+}
+
+/*
+ * A CDK Stack for your infrastructure
+ */
+export class CdkStack extends cdk.Stack {
+  constructor(scope: cdk.App, id: string, props: CdkStackProps) {
+    super(scope, id, props);
+
+    // keep these lines to support vended constructs from devportal
+
+    // const vended = new VendedConstructs(this, "VendedConstructs", {
+    //   assetId: props.assetId,
+    //   appEnv: props.appEnv,
+    //   imageTag: props.imageTag,
+    // });
+
+    // your custom infrastructure code goes here 👇
+    console.log(props);
+
+    (async function (sp: Construct) {
+
+      let aws_region: any = props.env
+      let ar: string = ""
+
+      if (typeof aws_region.region !== "undefined") {
+        ar = aws_region.region
+      } else {
+        ar = "us-west-2"
+      }
+
+      let config_key = `${ar}_${props.appEnv}`;
+
+      const syseng_configuration: any = await assemble_config_file(aws_region.config_filepath, config_key);
+
+      var credentials = new AWS.SharedIniFileCredentials({profile: 'default'});
+
+      // var credentials = new AWS.SharedIniFileCredentials({profile: 'learning-7'});
+
+      AWS.config.update({region: ar, credentials: credentials});
+      var aws_ec2 = new AWS.EC2();
+
+      const vpc_id = map_get(syseng_configuration, "vpc_id");
+      const vpc_name = await get_vpc_name(aws_ec2, vpc_id);
+
+      console.log("vpc id is", vpc_id)
+      console.log("mapping", syseng_configuration);
+
+      let subnet_details: MapType = []
+
+      subnet_details = await get_subnets(aws_ec2, map_get(syseng_configuration, "subnets", []), vpc_id);
+      
+      console.log("------------------------")
+      console.log(subnet_details)
+      console.log(vpc_name)
+      console.log("------------------------")
+
+      const vpc = ec2.Vpc.fromVpcAttributes(sp, vpc_name, {
+          vpcId: vpc_id,
+          availabilityZones: map_get(subnet_details, "availability_zone"),
+          publicSubnetIds: map_get(subnet_details, "public_subnet_ids"),
+
+      });
+
+      if (vpc) {
+          let bastion_parameters: any = {vpc: vpc, appEnv: props.appEnv}
+
+          const curr_bastion_config: MapType = map_get(syseng_configuration, "bastion", [])
+
+          let aws_account_number: string = ""
+
+          if (map_get(syseng_configuration, "aws_account_number", "") == "") {
+        
+              throw Error("can not find aws_account_number in the configuration, here is the current configuration " + JSON.stringify(syseng_configuration))
+        
+          }else {
+        
+              aws_account_number = map_get(syseng_configuration, "aws_account_number")
+          
+          }
+
+          console.log("!!!!!@@@@@", aws_account_number)
+          
+          
+          for (const key of Object.keys(curr_bastion_config)) {
+              if (key == "userData") {
+                
+                const userdata = map_get(curr_bastion_config, "userData", "")
+                // "sysEng.userdata1"
+                if (userdata.startsWith("file://")) {
+
+                    console.log("@@@@@", userdata.substring(7))
+                    const content = readfile_sync(userdata.substring(7));
+
+                    // const stack_name = `${props.appEnv}-${props.assetId}`
+  
+                    bastion_parameters["userData"] = get_userData("check", content, ar, map_get(curr_bastion_config, "eip", ""), config_key, `${props.appEnv}-${props.assetId}`, aws_account_number)
+
+                    console.log("!!!!!", bastion_parameters["userData"])
+                
+                }else if (userdata.startsWith("filep://")) {
+
+                    const content = readfile_sync(userdata.substring(8));
+                    
+                    bastion_parameters["plainUserData"] = get_userData("plain", content, ar, map_get(curr_bastion_config, "eip", ""), config_key, `${props.appEnv}-${props.assetId}`, aws_account_number)
+
+                    console.log("!!!!!", bastion_parameters["userData"])
+
+                }else {
+                    
+                    bastion_parameters["userData"] = userdata
+                }
+                
+                continue
+               
+              }
+
+              bastion_parameters[key] = curr_bastion_config[key]
+
+          }
+
+          console.log("this is parameters", bastion_parameters)
+          new IntuBastion(sp, "identity-bastion", bastion_parameters);
+          
+          // new IntuBastion(sp, "sysEng-bastion", bastion_parameters);
+          
+      }
+    } 
+    )(this)
+  }
+}
