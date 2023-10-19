@@ -1,0 +1,10 @@
+
+summary of proposed change:
+
+The role of a synthetic data agent is to create synthetic configurations, such as those related to domains, services, and business flows, in the correct file format. This agent accomplishes this task by taking into account user inputs and historical events. These synthetic configurations are then used to simulate real-life events, enhancing the effectiveness of testing for Zachboard.
+
+
+By utilizing synthetic data, we can precisely determine when specific notifications should be activated. The primary responsibility of the performance assessment agent is to monitor how Zachboard responds to these simulated events. Subsequently, it provides recommendations for enhancing Zachboard's functionality to improve its overall performance.
+
+
+the issue of missing data points is quite common in the realm of observability, either due to bad data upstream or resource constraints. This situation can lead to significant confusion to our users. We can minimize these issues by move the compute between metrics to threshold closer to the data sources like what we did for lightstep migration.  This in turns reduces Zachboard runtime which opens the door forus to run zachboard more frequently. 
