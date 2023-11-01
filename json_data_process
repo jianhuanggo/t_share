@@ -1,0 +1,35 @@
+        #
+        # _json = "{\n\"cluster_name\": [\"identitycr-prd-usw2-k8s\", \"identitycr-prd-use2-k8s\"],\n\"namespace_name\": [\"identity-utilities-camsadapter-usw2-pro\", \"identity-utilities-camsadapter-use2-pro\"]\n}"
+
+        _format_data = [
+            
+            ("identity-utilities-camsadapter-usw2-prd", )
+        
+        
+        
+        ]
+
+
+    _parameters = {'description': 'Dashboard Description',
+                            'id': 'Test-HF',
+                            'name': 'Test-HF',
+                            'sections': [
+                                {'swimlane name': 'Section 1',
+                                 'rows':
+                                     [
+                                         {'charts':
+                                           [
+                                            {
+                                               "description": "description1",
+                                               'name': 'Chart 1',
+                                               'sources': [
+                                                   {'name': 'query', 'query': 'ts()'}
+                                               ]
+                                            }
+                                           ]
+                                        }
+                                     ]
+                                 }
+                            ],
+                            'url': 'Test-HF'
+                    }
