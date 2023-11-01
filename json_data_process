@@ -1,3 +1,55 @@
+# Your JSON structure
+_parameters = {
+    'description': 'Dashboard Description',
+    'id': 'Test-HF',
+    'name': 'Test-HF',
+    'sections': [
+        {
+            'swimlane name': 'cams adapter',
+            'rows': [
+                {
+                    'charts': [
+                        {
+                            "description": "description1",
+                            'name': 'placeholder',
+                            'sources': [
+                                {'name': 'comparison', 'query': '{}'},
+                                {'name': 'comparison', 'query': '{}'}
+                            ]
+                        },
+                        {
+                            "description": "description1",
+                            'name': 'Pod Count b',
+                            'sources': [
+                                {'name': 'east', 'query': 'rawsum(align(1m,ts(iks.namespace.app.pod.count, cluster=identitycr-prd-use2-k8s and namespace=identity-utilities-camsadapter-use2-prd'},
+                                {'name': 'west', 'query': 'rawsum(align(1m,ts(iks.namespace.app.pod.count, cluster=identitycr-prd-usw2-k8s and namespace=identity-utilities-camsadapter-usw2-prd'}
+                            ]
+                        },
+                        {
+                            "description": "description1",
+                            'name': 'FCI b',
+                            'sources': [
+                                {'name': 'east', 'query': 'rawsum(align(15s, sum, (default(0,ts(service.errors.count, (asset_alias="intuit.identity.manage.account") and env="prd*" and dc=us-east-2 and swimlane=b and intuit_api="_wildcard_" and http.status_code="5*").orElse(0)))))'},
+                                {'name': 'west', 'query': 'rawsum(align(15s, sum, (default(0,ts(service.errors.count, (asset_alias="intuit.identity.manage.account") and env="prd*" and dc=us-west-2 and swimlane=b and intuit_api="_wildcard_" and http.status_code="5*").orElse(0)))))'}
+                            ]
+                        },
+                        {
+                            "description": "description1",
+                            'name': 'p90 b',
+                            'sources': [
+                                {'name': 'east', 'query': 'rawavg(align(15s, mean, ts(service.latency.90th, (asset_alias="intuit.identity.manage.cams adapter") and env="prd*" and dc=us-east-2 and swimlane=b and intuit_api="_wildcard_")))'},
+                                {'name': 'west', 'query': 'rawavg(align(15s, mean, ts(service.latency.90th, (asset_alias="intuit.identity.manage.cams adapter") and env="prd*" and dc=us-west-2 and swimlane=b and intuit_api="_wildcard_")))'}
+                            ]
+                        },
+                    ]
+                }
+            ]
+        }
+    ],
+    'url': 'Test-HF'
+}
+
+
         #
         # _json = "{\n\"cluster_name\": [\"identitycr-prd-usw2-k8s\", \"identitycr-prd-use2-k8s\"],\n\"namespace_name\": [\"identity-utilities-camsadapter-usw2-pro\", \"identity-utilities-camsadapter-use2-pro\"]\n}"
 
