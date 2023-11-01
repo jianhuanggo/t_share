@@ -33,3 +33,12 @@
                             ],
                             'url': 'Test-HF'
                     }
+
+
+rawsum(align(15s, sum, (default(0,ts(service.errors.count, (asset_alias="intuit.identity.manage.account") and env="prd*" and dc="us-east-2" and swimlane="b" and intuit_api="_wildcard_" and http.status_code="5*").orElse(0)))))
+
+rawsum(align(15s, sum, (default(0,ts(service.errors.count, (asset_alias="intuit.identity.manage.account") and env="prd*" and dc="us-west-2" and swimlane="b" and intuit_api="_wildcard_" and http.status_code="5*").orElse(0)))))
+
+rawavg(align(15s, mean, ts(service.latency.90th, (asset_alias="intuit.identity.manage.accountadapter") and env="prd*" and dc="us-east-2" and swimlane="b" and intuit_api="_wildcard_")))
+
+rawavg(align(15s, mean, ts(service.latency.90th, (asset_alias="intuit.identity.manage.accountadapter") and env="prd*" and dc="us-west-2" and swimlane="b" and intuit_api="_wildcard_")))
