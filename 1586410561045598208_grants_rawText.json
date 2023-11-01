@@ -1,0 +1,1 @@
+"{\n  \"cluster_name\": [\n    \"identitycr-prd-usw2-k8s\",\n    \"identitycr-prd-use2-k8s\"\n  ],\n  \"namespace_name\": [\n    \"identity-grantservice-usw2-prdb\",\n    \"identity-grantservice-use2-prdb\"\n  ]\n}"
