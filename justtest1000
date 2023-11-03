@@ -66,3 +66,37 @@ Strong background working with various SQL, NoSQL database technologies in a com
 Have extensive knowledge working with data security technologies both in transit and at rest
 Partner closely with cross-functional teams and often insight them with a unique cost-benefit analysis to help drive programs to successful completion
 Experienced with documenting and presenting data flow diagrams
+
+
+
+
+
+
+
+
+Experienced in data modeling, I have successfully designed and modeled complex data models within the merchant reporting domain. I have also demonstrated expertise in data modeling for various business entities, ensuring effective representation of data structures.
+Undertook the design of star schema data models concerning account takeover (ATO) and user session validations for offline fraud data marts.
+Proficient in SQL skills, I possess a strong background in writing and tuning SQL queries. My expertise in SQL includes performance tuning, which has been instrumental in optimizing database operations.
+In my collaborative roles, I consistently worked closely with cross-functional teams, offering valuable and unique cost-benefit analysis insights to drive programs to successful completion
+Experienced in understanding industry trends and best practices, I have implemented innovative solutions to achieve business objectives. I have also built and maintained strong relationships with cross-functional teams, fostering collaboration and alignment toward common goals.
+Experienced as a data transformation expert, I have not only possessed a deep knowledge of ETL systems but also had many years of hands-on experience in manipulating data into various formats and troubleshooting complex data issues.
+Proficient in evaluating technologies and making well-informed trade-offs, I have demonstrated a unique ability to handle diverse technologies, particularly in the data infrastructure space.
+Successfully drove the adoption of AI and Kubernetes within data platform communities, resulting in substantial improvements in efficiency and productivity.
+Partnered closely with numerous business stakeholders to formulate high-level implementation plans for company-level projects, providing valuable insights and guidance.
+Designed and modeled complex data models within the merchant reporting domain.
+Played a pivotal role in architecting a data solution for migrating a large volume of data between two Teradata platforms in a short timeframe, a critical component of PayPal's data center migration program.
+Architected a data scanner as part of the GDPR initiative, capable of extracting critical system information from PayPal Data Platforms across various ecosystems and security zones, spanning multiple public clouds.
+Familiar with ETL tools such as Informatica and Ab Initio, along with expertise in providing metadata management and end-to-end data lineage solutions.
+Proficient in working with cloud services and developing solutions on the AWS cloud platform.
+Possessed extensive knowledge of data security technologies, encompassing data in transit and at rest.
+Collaborated closely with cross-functional teams, often providing unique cost-benefit analysis insights to drive programs to successful completion.
+Documented and presented data flow diagrams, supporting effective communication and decision-making processes.
+
+
+remove the I and start each paragraph with the verb
+
+range the data modeling skills first and follow by SQL skills
+
+keep it formal by use starting word such as proficient, experienced, understands, use verb in the past tense 
+
+indirectly inference that I'm a great collaborator, To express "I'm a great collaborator" in the sentence, you can rephrase it as:
