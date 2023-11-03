@@ -1,0 +1,68 @@
+Base on this job description below, what is the biggest challenge someone in this position would face day to day?
+
+Create, document, publish and own the data models in a reporting and analytics environment
+Provide data modeling design review and advice to business and engineering teams.
+Identify shared concepts across business unites and ensure a single representation in the data model and platform
+Define tools and process for continuous team productivity and improved quality.
+Build relationships across both business and engineering teams to suppoert a cooperative environment
+
+
+5+ years as a full-time data modeler or equivalent
+Strong knowledge of data modeling principles and best practices
+Ability to quickly grasp technological and business concepts.
+Strong verbal and written communication skills; experience communicating with data engineers, business users and management to succinctly explain technical and functional concepts.
+Gather business requirements and turn them into a logical data model that represents the business.
+Understand Dimensional, Data Vault, 3NF and Canonical data modeling techniques
+Mentor, educate engineering and business users on benefits and techniques of data modeling.
+Know the difference between an ERD model, DBT data model and a ML data model.
+Strong, hands-on knowledge of SQL including performance tuning.
+Experience with the full software lifecycle process, delivering enterprise software products or large-company enterprise information technology projects.
+Ability to work on multiple projects simultaneously and comfortable working with minimal specifications.
+Good understanding of enterprise architecture principles
+A related technical bachelor’s degree or equivalent
+Snowflake security, architecture and/or engineering
+DBT
+CI/CD tools and processes for data engineering
+Experience working in an FDA regulated industry.
+Master Data Management tools and processes 
+Data Mesh concepts and goals
+Python, Node.js
+Understand PII, PHI, GDPR, GxP, CCPA and other data handling law
+
+
+
+I'm current working as data architect at Paypal and performing following roles below.  Paraphrase these to highlights my experiences and qualification base in a way that shows I empathize with the challenges in the job description.  
+
+thrive in fast-paced, high-pressure environments.  Have a track record of effectively navigating complex organizational structures and dealing with ambiguity to drive high-impact projects within budget to their successful completion. 
+have a knack for identifying and mitigating risks while focusing on project objectives. My strong leadership and problem-solving skills enable me to adapt to changing project requirements and guide cross-functional teams toward achieving project milestones.
+skilled in identifying industry trends and best practices, and implementing innovative solutions to achieve business objectives. Adept at building and maintaining strong relationships with cross-functional teams, driving collaboration and alignment towards common goals. 
+A technologist who has hands-on experience with countless technologies, especially in the data infrastructure space, and has developed unique tastes in evaluating technologies and making the appropriate tradeoffs given real-world situations.
+Data transformation expert who not only possesses a deep knowledge of ETL systems but also has many years of 
+Have successfully driven the adoption of AI and Kubernetes within data platform communities, resulting in improved efficiency and increased productivity.
+Data transformation expert who not only possesses a deep knowledge of ETL systems but also has many years of hands-on experience in manipulating data into different formats and troubleshooting/fixing various data issues.
+A technologist who has hands-on experience with countless technologies, especially in the data infrastructure space, and has developed unique tastes in evaluating technologies and making the appropriate tradeoffs given real-world situations.
+Worked with various leaders to come up with data strategy and technical visions for Paypal core data platforms
+An excellent Python programmer 
+Partner closely with many business stakeholders to come up with “big rocks” and high-level implementation plans for company-level projects
+Successfully drove a company-level initiative in GDPR to its completion
+Successfully architected Paypal’s data privacy scanner, capable of extracting critical system information from all Paypal Data Platforms across various security zones including world largest oracle systems and 2nd largest Teradata system. 
+Data Modeled various business entities
+Successfully developed and implemented numerous automation solutions to improve system efficiency.
+Designed data models for user holdings and account reconciliation domains as part of Paypal financial operation
+Strong SQL skills and proficiency in tuning SQLs
+Excellent understanding of ETL domains
+Experienced in providing solutions in the domains of enterprise metadata management
+Proficient in developing solutions which are Cloud compliant.
+Designed and modeled a complex snowflake data model in merchant reporting domain
+Designed several star schema data models regarding ATO (account takeover) and user session validations for offline fraud data marts
+Designed data models for user holdings and account reconciliation domains as part of Paypal financial operation
+Played a key role in architecting a data solution to migrate a large amount of data in a short time between two Teradata platforms, a crucial part of the data center migration program for the Paypal spinoff initiative
+As part of the GDPR initiative, successfully architected a data scanner, capable of extracting critical system information from Paypal Data Platforms such as Hadoop ecosystems, Cassandra, CouchDB, MongoDB, AeroSpike, and various RBDMs across security zones and from multiple public clouds.
+Strong SQL skills and proficient in tuning SQLs
+Familiar with ETL tools such as Informatica and ab initio
+Experienced in providing metadata management, end-to-end data lineage solutions
+Proficient in working with cloud services and developing solutions on AWS cloud
+Strong background working with various SQL, NoSQL database technologies in a complex, highly available and scalable environment
+Have extensive knowledge working with data security technologies both in transit and at rest
+Partner closely with cross-functional teams and often insight them with a unique cost-benefit analysis to help drive programs to successful completion
+Experienced with documenting and presenting data flow diagrams
