@@ -1,0 +1,13 @@
+add this to pgtranscribe2
+
+def poc():
+    from youtube_transcript_api import YouTubeTranscriptApi
+
+    video_url = 'https://www.youtube.com/watch?v=oWh4PP68RsE'
+    video_id = video_url.split('v=')[-1]  # Extracts the video ID from the URL.
+
+    transcript = YouTubeTranscriptApi.get_transcript(video_id)
+
+    transcript_text = "\n".join([text_fragment['text'] for text_fragment in transcript])
+
+    print(transcript_text)
