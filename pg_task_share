@@ -1,0 +1,19 @@
+###################
+#visibility
+#hashing / prove by contradict
+#repeat pattern
+###################
+
+
+export PROJECT_NAME=pgtranscribe2
+export PROJECT_REPO=pgtranscribe2.git
+
+conda create -n ${PROJECT_NAME} python=3.11 -y
+conda activate ${PROJECT_NAME}
+cd /Users/jianhuang/anaconda3/envs/${PROJECT_NAME}
+
+
+git clone https://github.com/jianhuanggo/${PROJECT_REPO}
+git clone https://github.com/jianhuanggo/pgtask.git
+cp -r pgtask/* ${PROJECT_NAME}/
+rm -rf pgtask
