@@ -1,5 +1,257 @@
 finding job app
 
+finding job app
+
+expedite a way for us to connect our dream job, 
+
+pitch
+when job is no longer labeled as a job, LLM native 
+
+take from job seek point of view
+
+
+
+1) go to bing
+2) go to www.rubrik.com
+3) 
+
+
+
+
+
+
+precise myself
+---------
+what is the best prompt for summarization:
+below is my experience in this resume/content, please summarize this and translate them into what I know,  this information will be needed for job research, hence include as many valuable keyword as possible.  please also include my location as well
+
+
+
+
+
+
+
+
+search
+---------
+go to Rubrik and parse its career webpage and get all the position that pertaining to data
+I want you to search thru all these job profiles and send me the ones are relevant to my experiences below
+
+<A description of myself>
+
+
+
+meta -> job description
+
+
+
+
+parse https://accessipos.com/upcoming-ipos/ and get all the company in this web page
+
+ChatGPT
+Here is the list of companies from the "Upcoming IPOs 2024" page on accessipos.com:
+
+Rubrik
+Turo
+Ibotta
+Databricks
+ServiceTitan
+Circle
+Liquid Death
+Lime
+Stripe
+Canva
+Flexport
+OpenAI
+Grammarly
+Starlink (SpaceX Spinoff)
+Reddit
+Fanatics
+Zipline
+Scale AI
+Anduril
+Epic Games
+Sila Nanotechnologies
+Redwood Materials
+Northvolt (Upcoming European IPO)
+Revolut (Upcoming European IPO)
+Klarna (Upcoming European IPO)
+Houzz
+Tanium
+Skims
+BMC Software
+Patreon
+Addepar
+Neuralink
+The Boring Company
+Chime
+Plaid
+Impossible Foods
+Rippling
+OnlyFans (Upcoming IPO or SPAC)
+ThoughtSpot
+Netskope
+Weee!
+Discord
+Automation Anywhere
+Skydio
+Cameo
+Acorns
+OpenSea
+Miro
+TerraPower
+Gopuff
+X Corp (Twitter IPO 2.0)
+
+
+
+
+
+
+Here are the positions related to data currently available at Rubrik, as listed on their career website:
+
+Bangalore, India Office:
+
+Senior Site Reliability Engineer - InfoSec
+Database Architect - Polaris
+Palo Alto, CA HQ Office:
+
+Senior Product Security Manager​​.
+Senior Software Engineer - SQL Server and Exchange​​.
+Senior Software Engineer - VMware / Windows (Hypervisor, Backend)​​.
+Site Reliability Engineer - FedRamp​​.
+Software Engineer, Core Experience​​.
+Software Engineer, Core Infrastructure​​.
+Software Engineer, Developer Productivity​​.
+Software Engineer, SaaS Data Protection​​.
+Staff Software Engineer, Database Engine​​.
+United States - Remote:
+
+Information Security Program Manager, Disaster Recovery Architect​​.
+Senior Information Security Engineer - FedRAMP​​.
+Sr Site Reliability Engineer - FedRamp​​.
+Seattle, WA Office:
+
+Software Engineer - Files and Objects Infrastructure​​.
+These positions cover a range of roles involving data, such as database architecture, software engineering with a focus on data protection and infrastructure, and security roles related to data management and recovery.
+
+
+
+
+Designed and implemented complex data schemas to support AI model inference and reporting needs, adhering to best practices and industry standards.
+below is my experience at various companies, please summarize this and translate them into what I know
+
+Designed and implemented complex data schemas to support AI model inference and reporting needs, adhering to best practices and industry standards.
+Developed and maintained data dictionaries, ensuring comprehensive documentation of data definitions and relationships across the organization.
+Conducted data profiling and analysis to identify data quality issues, successfully implementing data cleansing and transformation processes to enhance data accuracy.
+Demonstrated a strong understanding of data validation by creating and maintaining data validation routines and automated scripts, ensuring unwavering data consistency and integrity.
+Collaborated effectively with cross-functional teams to gather and analyze requirements, subsequently translating them into efficient data models.
+Applied expertise in SQL query optimization to fine-tune SQL queries and ETL processes, resulting in a notable 30% reduction in query execution times.
+Implemented rigorous data security measures and access controls to safeguard sensitive information.
+Provided valuable mentorship and support to junior developers, sharing best practices in data modeling and SQL optimization techniques.
+
+
+Paypal, Inc, San Jose, CA
+Senior Architect, April 2016 -  April 2023
+
+Experienced in data modeling, I have successfully designed and modeled complex data models within the merchant reporting domain. I have also demonstrated expertise in data modeling for various business entities, ensuring effective representation of data structures.
+Undertook the design of star schema data models concerning account takeover (ATO) and user session validations for offline fraud data marts.
+Proficient in SQL skills, I possess a strong background in writing and tuning SQL queries. My expertise in SQL includes performance tuning, which has been instrumental in optimizing database operations.
+In my collaborative roles, I consistently worked closely with cross-functional teams, offering valuable and unique cost-benefit analysis insights to drive programs to successful completion
+Experienced in understanding industry trends and best practices, I have implemented innovative solutions to achieve business objectives. I have also built and maintained strong relationships with cross-functional teams, fostering collaboration and alignment toward common goals.
+Experienced as a data transformation expert, I have not only possessed a deep knowledge of ETL systems but also had many years of hands-on experience in manipulating data into various formats and troubleshooting complex data issues.
+Proficient in evaluating technologies and making well-informed trade-offs, I have demonstrated a unique ability to handle diverse technologies, particularly in the data infrastructure space.
+Successfully drove the adoption of AI and Kubernetes within data platform communities, resulting in substantial improvements in efficiency and productivity.
+Partnered closely with numerous business stakeholders to formulate high-level implementation plans for company-level projects, providing valuable insights and guidance.
+Designed and modeled complex data models within the merchant reporting domain.
+Played a pivotal role in architecting a data solution for migrating a large volume of data between two Teradata platforms in a short timeframe, a critical component of PayPal's data center migration program.
+Architected a data scanner as part of the GDPR initiative, capable of extracting critical system information from PayPal Data Platforms across various ecosystems and security zones, spanning multiple public clouds.
+Familiar with ETL tools such as Informatica and Ab Initio, along with expertise in providing metadata management and end-to-end data lineage solutions.
+Proficient in working with cloud services and developing solutions on the AWS cloud platform.
+Possessed extensive knowledge of data security technologies, encompassing data in transit and at rest.
+Collaborated closely with cross-functional teams, often providing unique cost-benefit analysis insights to drive programs to successful completion.
+Documented and presented data flow diagrams, supporting effective communication and decision-making processes.
+
+
+Deep  Learning LLM, NLP.  Programming Languages - Python, Golang, Nodejs, Cloud computing - AWS, GCP.  Big Data (Kafka, Hive, and Hadoop), ETL (Amazon Glue, Informatica, dbt, Ab Initio, Orchestration - Kubernetes, Airflow, Database - Teradata, Oracle, Mysql, Postgresql, MongoDB, Amazon DynamoDB, Amazon Redshift,  Messaging systems - RabbitMQ, Data Modeling, Data Governance, Security - OAuth, IAM, Kerberos, Query Engine - Presto and Storm, Data Management, DevOps - Terraform, Jenkins, docker self-motivated, fast learner, team player, works well in global teams, Project management and problem-solving
+
+
+ChatGPT
+
+Based on your extensive experience and skills, here's a summary and translation of your expertise:
+
+Data Modeling and Management:
+
+Expertise in designing complex data schemas supporting AI models and reporting, including star schema data models for fraud data marts and merchant reporting.
+Proficient in developing, maintaining, and documenting data dictionaries, ensuring clarity in data definitions and relationships.
+Skilled in conducting data profiling and analysis, adept at identifying and rectifying data quality issues through effective data cleansing and transformation.
+Strong background in creating and maintaining data validation routines and automated scripts, ensuring data consistency and integrity.
+SQL and Database Optimization:
+
+Advanced skills in SQL, including query writing and tuning, with a proven record of optimizing database operations and reducing query execution times by 30%.
+Experienced in working with multiple database systems like Teradata, Oracle, MySQL, PostgreSQL, MongoDB, Amazon DynamoDB, and Amazon Redshift.
+Collaboration and Leadership:
+
+Demonstrated ability in collaborating with cross-functional teams, analyzing requirements, and translating them into efficient data models.
+Experience in mentoring junior developers and sharing best practices in data modeling and SQL optimization.
+Strong capability in partnering with business stakeholders to formulate and execute high-level implementation plans for major projects.
+Technology and Tools Proficiency:
+
+Familiar with ETL tools (Informatica, Ab Initio, Amazon Glue, dbt) and orchestration tools (Kubernetes, Airflow).
+Proficient in various programming languages (Python, Golang, Node.js) and cloud computing platforms (AWS, GCP).
+Knowledgeable in big data technologies (Kafka, Hive, Hadoop), query engines (Presto, Storm), and messaging systems (RabbitMQ).
+Expertise in data security (OAuth, IAM, Kerberos), data governance, and data management.
+Skilled in DevOps practices and tools (Terraform, Jenkins, Docker).
+Personal Attributes:
+
+Recognized as a self-motivated, fast learner, and team player, effective in global team environments.
+Strong project management and problem-solving skills, with an ability to drive programs to successful completion.
+Your career at PayPal, Inc. as a Senior Architect reflects your deep involvement in data architecture, SQL optimization, technology evaluation, AI and Kubernetes adoption, GDPR initiatives, and cloud solutions, alongside your role in driving significant data infrastructure projects.
+
+
+
+
+Based on your rich career experience as a Senior Architect at PayPal, Inc., with expertise in data modeling, SQL, collaboration in cross-functional teams, ETL tools, cloud services, data security and governance, big data technologies, and programming, the following positions at Rubrik seem most relevant to your skill set:
+
+Database Architect - Polaris: This role involves owning database architecture for both online and analytics/offline use cases, with a strong focus on SQL expertise, including schema design and performance tuning. Details
+
+Staff Software Engineer, Database Engine: This position requires experience in programming languages (Go, C++, Java, Python), large-scale distributed systems design and development, and guiding junior engineers in the design and implementation of scalable software solutions. Details
+
+Senior Software Engineer - SQL Server and Exchange: The role includes full stack ownership, design, implementation, and testing of new features for SQL Server and Exchange deployments. It requires proficiency in Scala, C++, or Java, and experience with large distributed systems is preferred. Details
+
+Senior Software Engineer - VMware / Windows (Hypervisor, Backend): This role involves full stack ownership in protecting virtual machine/Windows host deployment in data centers and the cloud, with proficiency in C++, Java, Go, Scala, or Python. Details
+
+Software Engineer, Core Infrastructure: The position focuses on developing fundamental infrastructure components including microservices architecture, Kubernetes deployment system, and MySQL database instances. It requires experience in software development with Python, Go, Scala, and familiarity with databases (preferably MySQL). Details
+
+Software Engineer, Developer Productivity: This role involves solving frameworks, scalability & stability problems, and developing performance observability/debugging tools. It requires knowledge in Python, Golang, Java, or Scala, and experience with virtualization & Storage/database/network. Details
+
+These positions at Rubrik align with your experience in data modeling, SQL expertise, cloud services, and big data technologies. I recommend reviewing the detailed job descriptions to assess the best fit for your skills and career goals.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1) go to Weee! and parse its career webpage and get all the position that pertaining to data
+
+
+
+
+
+
 expedite a way for us to connect our dream job, 
 
 pitch
