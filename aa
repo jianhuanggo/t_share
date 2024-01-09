@@ -5,6 +5,30 @@ For the OIT AWS TRACS Test environment, create a document which details the step
 2-Document the steps to update the web server with the new IP address for the application (i.e. when the app server or Jenkins auto-recovers, it gets a new IP, the new IP must be added to the web server. )
 
 
+
+When a server in an AWS environment goes offline, there are several mechanisms and steps involved to ensure recovery and minimal disruption to services. Let’s elaborate on what happens specifically in the context of your AWS setup:
+
+Auto Scaling Group Recovery for EC2 Instances:
+
+Scenario for ec2 asg-tag-gttracs-web-test:
+
+When this EC2 instance goes offline, the AWS Auto Scaling Group (ASG) detects the failure.
+The ASG then automatically initiates the launch of a new EC2 instance to replace the offline instance.
+This process ensures minimal downtime and maintains the desired count of instances as defined in your ASG configuration.
+Scenario for ec2 asg-tag-gttracs-app-test, asg-tag-gttracs-bastion-test, and asg-tag-gttracs-jenkins-test:
+
+Similar to the web-test instance, if any of these instances go offline, the ASG will detect the failure and replace the offline instances with new ones.
+However, a key difference here is that the new instances will have different IP addresses. This is because when EC2 instances are terminated and new instances are launched, they typically receive new IP addresses from the subnet's IP address pool, unless Elastic IPs are used.
+Updating Apache Configuration in asg-tag-gttracs-web-test:
+
+Since the new instances (app-test, bastion-test, and jenkins-test) will have new IP addresses, the Apache configuration in the web-test instance must be updated to reflect these changes. This is crucial for ensuring that the web-test instance can communicate correctly with the other instances.
+List of Steps for Updating Apache Configuration:
+Identify New IP Addresses: Determine the new IP addresses of the replaced instances. This can be done through the AWS Management Console or using AWS CLI commands.
+Modify Apache Configuration: Access the Apache configuration files on the web-test instance. This is typically done via SSH into the instance.
+Update IP References: In the Apache configuration files, update any references to the old IP addresses with the new ones. This might involve editing virtual host settings or other directives that specify IP addresses.
+Restart Apache Service: After updating the configuration, restart the Apache service to apply the changes. This can be done using a command like sudo systemctl restart apache2 or a similar command depending on your server's operating system.
+Test the Configuration: Finally, it’s important to test the updated configuration to ensure that the web-test instance can communicate effectively with the new instances and that there are no disruptions in service.
+
 asg-tag-gttracs-bastion-test
 i-024c3f5c9dcbb6ede	
 Running
