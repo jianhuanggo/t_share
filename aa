@@ -1,0 +1,50 @@
+For the OIT AWS TRACS Test environment, create a document which details the steps needed to recover the GT-TRACS application in the event of failure.
+
+1- Document what occurs if any server goes offline (i.e. Auto-Scaling Group Recovery, new IP)
+
+2-Document the steps to update the web server with the new IP address for the application (i.e. when the app server or Jenkins auto-recovers, it gets a new IP, the new IP must be added to the web server. )
+
+
+asg-tag-gttracs-bastion-test
+i-024c3f5c9dcbb6ede	
+Running
+
+t3.medium	2/2 checks passed	
+View alarms
+
+us-east-1a	ec2-23-22-43-159.compute-1.amazonaws.com	23.22.43.159	–	–	enabled	sg_tag_gttracs_bastion-20220601013957486300000002	kp-tag-gttracs-bastion-test_.pem	
+rust-build-vm	i-081b96aff9b7d3012	
+Running
+
+t3.2xlarge	2/2 checks passed	
+View alarms
+
+us-east-1a	ec2-34-203-214-136.compute-1.amazonaws.com	34.203.214.136	–	–	enabled	sg_rust_build_vm	kp-tag-gttracs-bastion-test_.pem	
+CGBtest-DELETEME	i-0d90737312ce9443b	
+Running
+
+t2.micro	2/2 checks passed	
+View alarms
+
+us-east-1a	–	–	–	–	disabled	CGB-TEST-DONOTUSE	ns-cgb-tag-test	
+asg-tag-gttracs-app-test	i-0be4d79f22d21513c	
+Running
+
+t3.large	2/2 checks passed	
+View alarms
+
+us-east-1a	–	–	–	–	enabled	sg_tag_gttracs_app-20220601013957485600000001	kp-tag-gttracs-app-test_.pem	
+asg-tag-gttracs-web-test	i-0e39b922607e7e376	
+Running
+
+t3.medium	2/2 checks passed	
+View alarms
+
+us-east-1b	–	–	–	–	enabled	sg_tag_gttracs_web-20220601013957493500000005	kp-tag-gttracs-web-test_.pem	
+asg-tag-gttracs-jenkins-test	i-07733f883c5db010f	
+Running
+
+t3.medium	2/2 checks passed	
+View alarms
+
+us-east-1a
