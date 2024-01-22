@@ -1,0 +1,60 @@
+1. Create Your Docker Image
+First, you need to create a Docker image that is compatible with AWS Lambda. Your Dockerfile should use one of the base images provided by AWS for Lambda. These images are preconfigured to work with the Lambda execution environment.
+
+Here's an example Dockerfile:
+
+Dockerfile
+Copy code
+FROM public.ecr.aws/lambda/python:3.8
+
+# Copy function code and requirements.txt
+COPY app.py ./
+COPY requirements.txt ./
+
+# Install the function's dependencies using file requirements.txt
+RUN pip install -r requirements.txt
+
+# Set the CMD to your handler
+CMD ["app.handler"]
+Save to grepper
+This example is for a Python 3.8 Lambda function. Replace app.py and app.handler with your script and handler function.
+
+2. Build and Tag Your Docker Image
+Build your Docker image and tag it appropriately. Open a terminal and navigate to the directory containing your Dockerfile, then run:
+
+bash
+Copy code
+docker build -t my-lambda-function .
+Save to grepper
+3. Push the Image to Amazon ECR
+Before pushing the image, you need to create a repository in Amazon ECR:
+
+Go to the Amazon ECR console.
+Choose "Create repository."
+Follow the instructions to create a new repository.
+After creating the repository, push your Docker image to it:
+
+Authenticate Docker to your default ECR registry:
+
+bash
+Copy code
+aws ecr get-login-password --region your-region | docker login --username AWS --password-stdin your-account-id.dkr.ecr.your-region.amazonaws.com
+Tag your image to match your repository name:
+
+bash
+Copy code
+docker tag my-lambda-function:latest your-account-id.dkr.ecr.your-region.amazonaws.com/my-lambda-repo:latest
+Push the image to ECR:
+
+bash
+Copy code
+docker push your-account-id.dkr.ecr.your-region.amazonaws.com/my-lambda-repo:latest
+4. Create or Update Lambda Function
+Now, create or update a Lambda function to use this image:
+
+Go to the Lambda console.
+Choose "Create function" or select an existing function.
+For a new function, select "Container image" as the source.
+Enter the ECR image URI (you can find this in the ECR repository).
+Configure any additional settings like memory, timeout, and execution role.
+Click "Create function" or "Save changes."
