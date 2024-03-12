@@ -100,7 +100,36 @@ object_key = 'your-object-key'  # Example: 'foldername/filename.ext'
 source_profile = 'sourceAWSProfile'  # Source AWS CLI profile name
 target_profile = 'targetAWSProfile'  # Target AWS CLI profile name
 
-copy_to_bucket(source_bucket, target_bucket, object_key, source_profile, target_profile)
+def copy_bucket_contents(source_bucket_name, target_bucket_name, source_folder, source_profile_name, target_profile_name):
+    # Create a session using the source account profile
+    source_session = boto3.Session(profile_name=source_profile_name)
+    s3_source = source_session.client('s3')
+    
+    # Create a session using the target account profile
+    target_session = boto3.Session(profile_name=target_profile_name)
+    s3_target = target_session.client('s3')
+    
+    # List objects in the source bucket folder
+    paginator = s3_source.get_paginator('list_objects_v2')
+    for page in paginator.paginate(Bucket=source_bucket_name, Prefix=source_folder):
+        if "Contents" in page:
+            for obj in page['Contents']:
+                file_key = obj['Key']
+                copy_source = {
+                    'Bucket': source_bucket_name,
+                    'Key': file_key
+                }
+                
+                # Copy each object to the target bucket
+                s3_target.copy(copy_source, target_bucket_name, file_key)
+                print(f"Successfully copied {file_key} to {target_bucket_name}")
+
+# Example usage
+source_bucket = 'your-source-bucket-name'
+target_bucket = 'your-target-bucket-name'
+source_folder = 'your-source-folder/'  # Ensure this ends with a '/'
+source_profile = 'sourceAWSProfile'  # Source AWS CLI profile name
+target_profile = 'targetAWSProfile'  # Target AWS CLI profile name
 
 
 
