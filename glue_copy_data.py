@@ -73,6 +73,37 @@ if __name__ == "__main__":
     # Create an S3 client using the assumed role's credentials
     s3_client = get_s3_client_with_assumed_role(credentials)
 
+
+import boto3
+
+def copy_to_bucket(source_bucket_name, target_bucket_name, object_name, source_profile_name, target_profile_name):
+    # Create a session using the source account profile
+    source_session = boto3.Session(profile_name=source_profile_name)
+    s3_source = source_session.client('s3')
+    
+    # Create a session using the target account profile
+    target_session = boto3.Session(profile_name=target_profile_name)
+    s3_target = target_session.client('s3')
+    
+    # Copy object
+    copy_source = {
+        'Bucket': source_bucket_name,
+        'Key': object_name
+    }
+    s3_target.copy(copy_source, target_bucket_name, object_name)
+    print(f"Successfully copied {object_name} from {source_bucket_name} to {target_bucket_name}")
+
+# Example usage
+source_bucket = 'your-source-bucket-name'
+target_bucket = 'your-target-bucket-name'
+object_key = 'your-object-key'  # Example: 'foldername/filename.ext'
+source_profile = 'sourceAWSProfile'  # Source AWS CLI profile name
+target_profile = 'targetAWSProfile'  # Target AWS CLI profile name
+
+copy_to_bucket(source_bucket, target_bucket, object_key, source_profile, target_profile)
+
+
+
     # Copy the object
     copy_objects(source_bucket_name, destination_bucket_name, object_key, s3_client)
 
