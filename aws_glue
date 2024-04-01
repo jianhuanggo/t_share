@@ -1,0 +1,30 @@
+import sys
+from awsglue.transforms import *
+from awsglue.utils import getResolvedOptions
+from pyspark.context import SparkContext
+from awsglue.context import GlueContext
+from awsglue.job import Job
+
+args = getResolvedOptions(sys.argv, ["JOB_NAME"])
+sc = SparkContext()
+glueContext = GlueContext(sc)
+spark = glueContext.spark_session
+job = Job(glueContext)
+job.init(args["JOB_NAME"], args)
+
+# Script generated for node AWS Glue Data Catalog
+AWSGlueDataCatalog_node1711628726733 = glueContext.create_dynamic_frame.from_catalog(
+    database=" rds_dev_global_staging",
+    table_name="global_staging_person_test",
+    transformation_ctx="AWSGlueDataCatalog_node1711628726733",
+)
+
+# Script generated for node AWS Glue Data Catalog
+AWSGlueDataCatalog_node1711628733842 = glueContext.write_dynamic_frame.from_catalog(
+    frame=AWSGlueDataCatalog_node1711628726733,
+    database="rds_dev_global_data",
+    table_name="global_data_person_from_gttracs",
+    transformation_ctx="AWSGlueDataCatalog_node1711628733842",
+)
+
+job.commit()
