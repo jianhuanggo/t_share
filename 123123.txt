@@ -129,3 +129,39 @@ ENV JAVA_OPTS="-Xmx4g -Xms2g"
 # Define the command to run your application
 CMD ["java", "$JAVA_OPTS", "-jar", "app.jar"]
 
+
+
+
+
+kubectl exec -it <pod-name> -c <container-name> -- /bin/bash
+
+kubectl exec -it my-app-pod -c my-app-container -- /bin/bash
+
+telnet <your-rds-endpoint> <your-rds-port>
+
+kubectl get ingress your-app-ingress
+
+http://<alb-address>/
+
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+# ... other parts of the Ingress ...
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: your-app-service
+            port:
+              number: 80
+      - path: /admin
+        pathType: Prefix
+        backend:
+          service:
+            name: my-other-service
+            port:
+              number: 80
