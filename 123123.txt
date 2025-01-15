@@ -49,50 +49,50 @@ spark.sql(f"""
 """)
 
 
-
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: your-app-deployment
+  name: fusion-app
 spec:
-  replicas: 3 # Adjust the number of replicas as needed
+  replicas: 3
   selector:
     matchLabels:
-      app: your-app
+      app: fusion-app
   template:
     metadata:
       labels:
-        app: your-app
+        app: fusion-app
     spec:
       containers:
-      - name: your-app-container
-        image: <your-container-image> # Replace with your container image URI
+      - name: fusion-app-container
+        image: <your-container-image> 
         ports:
-        - containerPort: <your-app-port> # Replace with your application's port
+        - containerPort: 8081
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: your-app-service
+  name: fusion-app-service
 spec:
   selector:
-    app: your-app
-  type: LoadBalancer # This will provision an ALB
+    app: fusion-app
+  type: LoadBalancer
   ports:
   - protocol: TCP
     port: 80 # ALB listener port
-    targetPort: <your-app-port> # Your application's port
+    targetPort: 8081
 
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: your-app-ingress
+  name: fusion-app-ingress
   annotations:
-    kubernetes.io/ingress.class: alb # Use the ALB Ingress controller
-    alb.ingress.kubernetes.io/scheme: internet-facing # Or internal if needed
-    alb.ingress.kubernetes.io/target-type: ip # Use IP mode for private subnet
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
 spec:
   rules:
   - http:
@@ -101,6 +101,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: your-app-service
+            name: fusion-app-service
             port:
               number: 80
