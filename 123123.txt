@@ -104,3 +104,28 @@ spec:
             name: fusion-app-service
             port:
               number: 80
+
+
+
+
+# Use a base image with Java 11
+FROM openjdk:11-jre-slim
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the application property file to the container
+COPY application.properties .
+
+# Copy the JAR file to the container
+COPY your-app.jar app.jar
+
+# Expose the port your application listens on
+EXPOSE 8081
+
+# Set environment variables for memory settings (adjust as needed)
+ENV JAVA_OPTS="-Xmx4g -Xms2g"
+
+# Define the command to run your application
+CMD ["java", "$JAVA_OPTS", "-jar", "app.jar"]
+
