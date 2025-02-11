@@ -1,0 +1,124 @@
+Below is a step-by-step guide to install MySQL 8 on an Amazon Linux 1 EC2 instance or virtual machine. Please note that Amazon Linux 1 is quite old (it reached End-Of-Life in December 2020) and does not always have straightforward support for the latest software. However, you can usually use Oracle’s official MySQL Yum repository for RHEL/CentOS 6 (or 7 if needed) to install MySQL 8 on Amazon Linux 1.
+
+Important: If possible, consider migrating to Amazon Linux 2 or another more current distribution, since they have more up-to-date packages and continued support.
+
+1. Update the System
+First, make sure all existing packages are up-to-date:
+
+bash
+Copy
+Edit
+sudo yum update -y
+2. (Optional) Remove any Existing MySQL/MariaDB Packages
+Sometimes Amazon Linux 1 ships with MariaDB or older MySQL libraries. Remove them first to avoid conflicts:
+
+bash
+Copy
+Edit
+sudo yum remove -y mariadb-libs mysql
+3. Add the Official MySQL Yum Repository
+Oracle provides a MySQL Community Yum Repository that you can install. For Amazon Linux 1, which is roughly equivalent to RHEL/CentOS 6 in many respects, you can try using the el6 package (if that fails or leads to dependency issues, you can try the el7 package, but el6 is usually the first choice).
+
+3.1 Check for an Existing MySQL Repo Package
+Sometimes you already have the repository package installed from previous attempts. Check with:
+
+bash
+Copy
+Edit
+yum repolist all | grep mysql
+If you see mysql80-community or a similar repository, you may skip installing the repo package again. Otherwise, install it:
+
+3.2 Install the MySQL 8 Repository (el6 version)
+bash
+Copy
+Edit
+sudo rpm -ivh https://dev.mysql.com/get/mysql80-community-release-el6-3.noarch.rpm
+This command downloads and installs the MySQL Yum repository configuration for MySQL 8 on an EL6-based system.
+If you see dependency issues, try the el7 version:
+bash
+Copy
+Edit
+sudo rpm -ivh https://dev.mysql.com/get/mysql80-community-release-el7-5.noarch.rpm
+However, start with el6 as the first attempt on Amazon Linux 1.
+3.3 Verify the MySQL Repository
+After installing the repository RPM, verify the newly added repo:
+
+bash
+Copy
+Edit
+yum repolist enabled | grep mysql
+You should see output referencing mysql80-community.
+
+4. Enable the MySQL 8 Repo and Disable Other MySQL Repos
+By default, the installed repository package will enable MySQL 8 (mysql80-community) and may disable MySQL 5.7 (mysql57-community). To ensure MySQL 8 is enabled, run:
+
+bash
+Copy
+Edit
+sudo yum-config-manager --enable mysql80-community
+If yum-config-manager is not available, install yum-utils:
+
+bash
+Copy
+Edit
+sudo yum install yum-utils -y
+And if there’s a mysql57-community repo, disable it:
+
+bash
+Copy
+Edit
+sudo yum-config-manager --disable mysql57-community
+5. Install MySQL Community Server 8.0
+Now you can install the MySQL Community Server package:
+
+bash
+Copy
+Edit
+sudo yum install mysql-community-server -y
+Yum will resolve the dependencies and install MySQL 8.
+
+6. Start and Enable the MySQL Service
+Once the installation is complete, start MySQL (called mysqld on older distributions) and enable it on boot:
+
+bash
+Copy
+Edit
+sudo service mysqld start
+
+# Enable it on system startup
+sudo chkconfig mysqld on
+You can check the status with:
+
+bash
+Copy
+Edit
+sudo service mysqld status
+7. Secure Your MySQL Installation
+Check the Temporary Password:
+After the first startup of MySQL 8, a temporary root password is generated and stored in /var/log/mysqld.log. Find it with:
+
+bash
+Copy
+Edit
+sudo grep 'temporary password' /var/log/mysqld.log
+Run the MySQL Secure Installation Script:
+Use that temporary password to run the secure installation:
+
+bash
+Copy
+Edit
+sudo mysql_secure_installation
+You’ll be prompted to change the root password to a stronger one.
+You can also choose to remove anonymous users, disable remote root logins, remove test databases, etc.
+8. Verify Your Installation
+Finally, log into MySQL with your new root password:
+
+bash
+Copy
+Edit
+mysql -u root -p
+Check the MySQL version:
+
+sql
+Copy
+Edit
