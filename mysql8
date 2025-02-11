@@ -1,3 +1,5 @@
+sudo rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
+
 Below is a step-by-step guide to install MySQL 8 on an Amazon Linux 1 EC2 instance or virtual machine. Please note that Amazon Linux 1 is quite old (it reached End-Of-Life in December 2020) and does not always have straightforward support for the latest software. However, you can usually use Oracle’s official MySQL Yum repository for RHEL/CentOS 6 (or 7 if needed) to install MySQL 8 on Amazon Linux 1.
 
 Important: If possible, consider migrating to Amazon Linux 2 or another more current distribution, since they have more up-to-date packages and continued support.
