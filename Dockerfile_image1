@@ -1,0 +1,23 @@
+# Use Amazon Linux 2023 as the base image 
+FROM amazonlinux:2023 
+
+# Update the system and install Amazon Corretto JDK (Java 11) 
+RUN dnf update -y && \ dnf install -y java-11-amazon-corretto && \ dnf clean all 
+
+# Set the default Java version 
+ENV JAVA_HOME=/usr/lib/jvm/java-11-amazon-corretto 
+ENV PATH=$JAVA_HOME/bin:$PATH 
+
+# Verify Java installation 
+RUN java -version 
+
+
+# Set working directory 
+WORKDIR /app 
+
+
+COPY fusion.jar /app/myapp.jar 
+
+# Command to run the Java application 
+
+CMD ["java", "-jar", "/app/myapp.jar"]
