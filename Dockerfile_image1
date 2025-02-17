@@ -19,5 +19,8 @@ WORKDIR /app
 COPY fusion.jar /app/myapp.jar 
 
 # Command to run the Java application 
+# sudo dnf install -y https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm
+# sudo dnf install -y mysql-community-client
+
 
 CMD ["java", "-jar", "/app/myapp.jar"]
