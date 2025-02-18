@@ -24,3 +24,40 @@ COPY fusion.jar /app/myapp.jar
 
 
 CMD ["java", "-jar", "/app/myapp.jar"]
+
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fusion-app
+  labels:
+    app: fusion-app
+spec:
+  replicas: 2  # Adjust as needed
+  selector:
+    matchLabels:
+      app: fusion-app
+  template:
+    metadata:
+      labels:
+        app: fusion-app
+    spec:
+      containers:
+        - name: fusion-app
+          image: 288377065523.dkr.ecr.us-east-1.amazonaws.com/fusion-app5:latest
+          ports:
+            - containerPort: 8009
+            - containerPort: 8080
+            - containerPort: 8081
+            - containerPort: 8209
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+            requests:
+              cpu: "250m"
+              memory: "256Mi"
+          command: ["java", "-jar", "fusion.jar"]
+      imagePullSecrets:
+        - name: ecr-registry-secret
