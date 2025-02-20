@@ -61,3 +61,54 @@ spec:
           command: ["java", "-jar", "fusion.jar"]
       imagePullSecrets:
         - name: ecr-registry-secret
+
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: fusion-app-service
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: "external"
+spec:
+  selector:
+    app: fusion-app
+  ports:
+    - protocol: TCP
+      port: 80  # ALB forwards traffic to this port
+      targetPort: 8080  # Internal port where the app is running
+  type: ClusterIP
+
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: fusion-app-ingress
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+    alb.ingress.kubernetes.io/group.name: fusion-alb
+    alb.ingress.kubernetes.io/healthcheck-path: "/health"
+    alb.ingress.kubernetes.io/load-balancer-name: "fusion-alb"
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /fusion
+            pathType: Prefix
+            backend:
+              service:
+                name: fusion-app-service
+                port:
+                  number: 80
+
+
+
+kubectl apply -f fusion-deployment.yaml
+
+
+kubectl apply -f fusion-service.yaml
+
+
+kubectl apply -f fusion-ingress.yaml
