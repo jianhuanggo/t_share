@@ -165,3 +165,44 @@ spec:
             name: my-other-service
             port:
               number: 80
+
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Federated": "arn:aws:iam::936379345511:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/429E072A69CFCAB1A3D01E08A80843B9"
+      },
+      "Action": "sts:AssumeRoleWithWebIdentity",
+      "Condition": {
+        "StringEquals": {
+          "oidc.eks.us-east-1.amazonaws.com/id/429E072A69CFCAB1A3D01E08A80843B9:sub": "system:serviceaccount:kube-system:aws-load-balancer-controller",
+          "oidc.eks.us-east-1.amazonaws.com/id/429E072A69CFCAB1A3D01E08A80843B9:aud": "sts.amazonaws.com"
+        }
+      }
+    }
+  ]
+}
+
+aws iam create-role \
+  --role-name eks-alb-role \
+  --assume-role-policy-document file://trust-policy.json
+
+aws iam attach-role-policy \
+  --role-name eks-alb-role \
+  --policy-arn arn:aws:iam::936379345511:policy/ism-policy-eks-alb
+
+aws iam get-role --role-name eks-alb-role
+
+aws iam list-attached-role-policies --role-name eks-alb-role
+
+
+
+
+
+
+
+
+
+
