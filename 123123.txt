@@ -199,6 +199,71 @@ aws iam list-attached-role-policies --role-name eks-alb-role
 
 
 
+You can modify your Dockerfile to install nginx, configure it as a health check on port 80, and still run your Java application. Below is an improved version of your Dockerfile with these changes:
+
+Modified Dockerfile
+
+# Use Amazon Linux 2023 as the base image
+FROM amazonlinux:2023
+
+# Update the system and install Amazon Corretto JDK (Java 11) and Nginx
+RUN dnf update -y && \
+    dnf install -y java-11-amazon-corretto nginx && \
+    dnf clean all
+
+# Set the default Java version
+ENV JAVA_HOME=/usr/lib/jvm/java-11-amazon-corretto
+ENV PATH=$JAVA_HOME/bin:$PATH
+
+# Verify Java installation
+RUN java -version
+
+# Set working directory
+WORKDIR /app
+
+# Copy application files
+COPY application.properties .
+COPY fusion.jar fusion.jar
+
+# Expose ports
+EXPOSE 8080 8443 80
+
+# Configure Nginx as a health check server
+RUN echo "server { \
+    listen 80; \
+    location /health { \
+        return 200 'Healthy'; \
+        add_header Content-Type text/plain; \
+    } \
+}" > /etc/nginx/conf.d/default.conf
+
+# Start Nginx in the background and then run the Java application
+CMD ["sh", "-c", "nginx && java $JAVA_OPTS -jar fusion.jar"]
+
+# Health check to ensure Nginx is running
+HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
+    CMD curl --fail http://localhost/health || exit 1
+
+Changes & Explanation
+
+1. Install Nginx (dnf install -y nginx) so it can serve as a lightweight health check server.
+
+
+2. Expose Port 80 along with Java application ports (8080, 8443).
+
+
+3. Configure Nginx to serve a simple health check endpoint (/health) that returns 200 OK.
+
+
+4. Run Nginx in the background before launching the Java application (sh -c "nginx && java $JAVA_OPTS -jar fusion.jar").
+
+
+5. Add a Health Check (HEALTHCHECK) that regularly pings http://localhost/health to verify Nginx is running.
+
+
+
+This ensures your container is healthy while still running your Java application. Let me know if you need further adjustments!
+
 
 
 
