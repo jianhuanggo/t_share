@@ -354,3 +354,74 @@ spec:
                   number: 8081  # Port of the healthcheck deployment
 
 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: fusion-app-4
+  name: fusion-app
+  labels:
+    app: fusion-app
+spec:
+  replicas: 1  # Adjust as needed
+  selector:
+    matchLabels:
+      app: fusion-app
+  template:
+    metadata:
+      labels:
+        app: fusion-app
+    spec:
+      containers:
+        - name: fusion-app
+          image: 288377065523.dkr.ecr.us-east-1.amazonaws.com/fusion_app7:latest
+          ports:
+            - containerPort: 8009
+            - containerPort: 8080
+            - containerPort: 8081
+            - containerPort: 8209
+            - containerPort: 8015
+          resources:
+            limits:
+              cpu: "1000m"
+              memory: "1024Mi"
+            requests:
+              cpu: "1000m"
+              memory: "1024Mi"
+          command: ["java", "-jar", "fusion.jar"]
+
+        - name: nginx-sidecar
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: nginx-config
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
+      volumes:
+        - name: nginx-config
+          configMap:
+            name: nginx-config
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+  namespace: fusion-app-4
+data:
+  nginx.conf: |
+    events {}
+    http {
+        server {
+            listen 80;
+            location / {
+                return 200 "OK";
+            }
+        }
+    }
+
